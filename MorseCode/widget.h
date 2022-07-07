@@ -15,6 +15,9 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
+private slots:
+    void onIndexChanged(int index);
+
 private:
     Ui::Widget *ui;
 };
