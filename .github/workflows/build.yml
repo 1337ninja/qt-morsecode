@@ -8,7 +8,7 @@ on:
 
 env:
   CMAKE_BUILD_TYPE: Release
-  QT_INSTALL_LOCATION: 'C:/Qt'
+  QT_INSTALL_LOCATION: 'C:/'
   QT_VERSION: '6.2.0'
   QT_VC_VERSION: msvc2019_64
 
@@ -20,12 +20,12 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Cache Qt
-      id: cache-qt
-      uses: actions/cache@v1  # not v2!
-      with:
-        path: ../Qt
-        key: ${{ runner.os }}-QtCache
+    # - name: Cache Qt
+    #   id: cache-qt
+    #   uses: actions/cache@v1  # not v2!
+    #   with:
+    #     path: ../Qt
+    #     key: ${{ runner.os }}-QtCache
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
