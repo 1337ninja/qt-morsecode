@@ -13,6 +13,10 @@ jobs:
   build-qt-windows:
     runs-on: windows-latest
     steps:
+
+    - name: Checkout repo
+      uses: checkout@v3
+
     - name: Cache Qt
       id: cache-qt
       uses: actions/cache@v1  # not v2!
@@ -36,9 +40,6 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
       with:
         msbuild-architecture: x64
-
-    - name: List files
-      run:  Get-ChildItem .
 
     - name: Configure CMake
       run: cmake -DCMAKE_PREFIX_PATH='${{github.workspace}}'/Qt -S ./MorseCode/  -B '${{github.workspace}}'/build -G "Visual Studio 17 2022"
