@@ -11,8 +11,6 @@ env:
   CMAKE_BUILD_PATH: ./build
   QT_INSTALL_LOCATION: 'C:/'
   QT_VERSION: '6.2.0'
-  QT_VC_VERSION: msvc2019_64
-  QT_CACHE_PATH: 'C:/Qt'
   SRC_PATH: './MorseCode'
 
 jobs:
@@ -32,9 +30,6 @@ jobs:
         target: 'desktop'
         arch: 'win64_msvc2019_64'
 
-    - name: List qt dir
-      run: Get-ChildItem ${{ env.QT_CACHE_PATH }}/${{ env.QT_VERSION }}/${{ env.QT_VC_VERSION }}
-
     - name: Setup cmake
       uses: jwlawson/actions-setup-cmake@v1.12
 
@@ -46,7 +41,7 @@ jobs:
     - name: Configure CMake
       run: |
         Write-Host "Configuring CMake..."
-        cmake -DCMAKE_PREFIX_PATH=${{ env.QT_CACHE_PATH }}/${{ env.QT_VERSION }}/${{ env.QT_VC_VERSION }} -S ${{ env.SRC_PATH }} -B ${{ env.CMAKE_BUILD_PATH }} -G "Visual Studio 17 2022"
+        cmake -DCMAKE_PREFIX_PATH=${{ env.Qt6_DIR }} -S ${{ env.SRC_PATH }} -B ${{ env.CMAKE_BUILD_PATH }} -G "Visual Studio 17 2022"
 
     - name: Build
       run: cmake --build ${{ env.CMAKE_BUILD_PATH }} --config ${{ env.CMAKE_BUILD_TYPE }}
