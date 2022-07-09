@@ -32,7 +32,7 @@ jobs:
       with:
         cached: ${{ steps.cache-qt.outputs.cache-hit }}
         version: $QT_VERSION
-        dir: $QT_INSTALL_LOCATION
+        dir: ${{ env.QT_INSTALL_LOCATION }}
         host: 'windows'
         target: 'desktop'
         arch: 'win64_msvc2019_64'
@@ -47,9 +47,9 @@ jobs:
 
     - name: Configure CMake
       run: |
-        Write-Host $QT_INSTALL_LOCATION/$QT_VERSION/$QT_VC_VERSION
-        cmake -DCMAKE_PREFIX_PATH="$QT_INSTALL_LOCATION/$QT_VERSION/$QT_VC_VERSION" -S ./MorseCode/  -B "${{github.workspace}}/build" -G "Visual Studio 17 2022"
+        Write-Host ${{ env.QT_INSTALL_LOCATION }}/${{ env.QT_VERSION }}/${{ env.QT_VC_VERSION }}
+        cmake -DCMAKE_PREFIX_PATH="${{ env.QT_INSTALL_LOCATION }}/${{ env.QT_VERSION }}/${{ env.QT_VC_VERSION }}" -S ./MorseCode/  -B "${{github.workspace}}/build" -G "Visual Studio 17 2022"
 
     - name: Build
-      run: cmake --build "${{github.workspace}}/build" --config $CMAKE_BUILD_TYPE
+      run: cmake --build "${{github.workspace}}/build" --config $ {{ env.CMAKE_BUILD_TYPE }}
 
