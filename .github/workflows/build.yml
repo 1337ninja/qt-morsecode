@@ -43,8 +43,8 @@ jobs:
 
     - name: Configure CMake
       run: |
-        "${{RUNNER_WORKSPACE}}"
-        cmake -DCMAKE_PREFIX_PATH="${{RUNNER_WORKSPACE}}" -S ./MorseCode/  -B "${{github.workspace}}/build" -G "Visual Studio 17 2022"
+        Write-Host "${{runner.workspace}}"
+        cmake -DCMAKE_PREFIX_PATH="${{runner.workspace}}" -S ./MorseCode/  -B "${{github.workspace}}/build" -G "Visual Studio 17 2022"
 
     - name: Build
       run: cmake --build "${{github.workspace}}/build"
