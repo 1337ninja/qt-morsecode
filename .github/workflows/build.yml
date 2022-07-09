@@ -51,7 +51,7 @@ jobs:
     - name: Configure CMake
       run: |
         Write-Host "Configuring CMake..."
-        cmake -DCMAKE_PREFIX_PATH="${{ env.QT_CACHE_PATH }}/${{ env.QT_VERSION }}/${{ env.QT_VC_VERSION }}" -S ${{ env.SRC_PATH }} -B ${{ env.CMAKE_BUILD_PATH }} -G "Visual Studio 17 2022"
+        cmake -DCMAKE_PREFIX_PATH=${{ env.QT_CACHE_PATH }}/${{ env.QT_VERSION }}/${{ env.QT_VC_VERSION }} -S ${{ env.SRC_PATH }} -B ${{ env.CMAKE_BUILD_PATH }} -G "Visual Studio 17 2022"
 
     - name: Build
       run: cmake --build ${{ env.CMAKE_BUILD_PATH }} --config ${{ env.CMAKE_BUILD_TYPE }}
