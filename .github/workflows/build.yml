@@ -30,7 +30,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        cached: ${{ steps.cache-qt.outputs.cache-hit }}
+        # cached: ${{ steps.cache-qt.outputs.cache-hit }}
         version: ${{ env.QT_VERSION }}
         dir: ${{ env.QT_INSTALL_LOCATION }}
         host: 'windows'
