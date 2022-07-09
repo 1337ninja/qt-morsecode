@@ -55,7 +55,7 @@ jobs:
         cmake -DCMAKE_PREFIX_PATH="${{ env.QT_INSTALL_LOCATION }}/${{ env.QT_VERSION }}/${{ env.QT_VC_VERSION }}" @'
               -S ${{ env.SRC_PATH }}
               -B ${{ env.CMAKE_BUILD_PATH }}
-              -G ${{ env.CMAKE_GENERATOR }}'@
+              -G ${{ env.CMAKE_GENERATOR }} '@
 
     - name: Build
       run: cmake --build ${{ env.CMAKE_BUILD_PATH }} --config ${{ env.CMAKE_BUILD_TYPE }}
