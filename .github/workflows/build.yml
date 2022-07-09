@@ -23,17 +23,9 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Cache Qt
-      id: cache-qt
-      uses: actions/cache@v1  # not v2!
-      with:
-        path: ${{ env.QT_CACHE_PATH }}
-        key: ${{ runner.os }}-QtCache
-
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        cached: ${{ steps.cache-qt.outputs.cache-hit }}
         version: ${{ env.QT_VERSION }}
         dir: ${{ env.QT_INSTALL_LOCATION }}
         host: 'windows'
