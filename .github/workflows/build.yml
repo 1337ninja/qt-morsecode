@@ -52,6 +52,8 @@ jobs:
     - name: Configure CMake
       run: |
         Write-Host "Configuring CMake..."
+        Write-Host ${{ env.CMAKE_GENERATOR }}
+        Write-Host "${{ env.CMAKE_GENERATOR }}"
         cmake -DCMAKE_PREFIX_PATH="${{ env.QT_INSTALL_LOCATION }}/${{ env.QT_VERSION }}/${{ env.QT_VC_VERSION }}" -S ${{ env.SRC_PATH }} -B ${{ env.CMAKE_BUILD_PATH }} -G ${{ env.CMAKE_GENERATOR }}
 
     - name: Build
