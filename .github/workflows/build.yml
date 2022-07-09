@@ -40,6 +40,9 @@ jobs:
         target: 'desktop'
         arch: 'win64_msvc2019_64'
 
+    - name: List qt dir
+      run: Get-ChildItem ${{ env.QT_CACHE_PATH }}/${{ env.QT_VERSION }}/${{ env.QT_VC_VERSION }}
+
     - name: Setup cmake
       uses: jwlawson/actions-setup-cmake@v1.12
 
