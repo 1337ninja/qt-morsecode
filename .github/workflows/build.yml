@@ -9,12 +9,12 @@ on:
 env:
   CMAKE_BUILD_TYPE: Release
   CMAKE_BUILD_PATH: ./build
-  CMAKE_GENERATOR: "Visual Studio 17 2022"
+  CMAKE_GENERATOR: Visual Studio 17 2022
   QT_INSTALL_LOCATION: 'C:/'
   QT_VERSION: '6.2.0'
   QT_VC_VERSION: msvc2019_64
   QT_CACHE_PATH: 'C:/Qt'
-  SRC_PATH: "./MorseCode"
+  SRC_PATH: './MorseCode'
 
 jobs:
   build-qt-windows:
