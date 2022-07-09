@@ -37,8 +37,8 @@ jobs:
       with:
         msbuild-architecture: x64
 
-    - name: ls
-      run: ls
+    - name: List files
+      run:  Get-ChildItem .
 
     - name: Configure CMake
       run: cmake -DCMAKE_PREFIX_PATH='${{github.workspace}}'/Qt -S ./MorseCode/  -B '${{github.workspace}}'/build -G "Visual Studio 17 2022"
