@@ -19,7 +19,10 @@ set(PROJECT_SOURCES
         widget.cpp
         widget.h
         widget.ui
-        ConverterInterface.h
+        converter_interface.h
+        constants.h
+        converter.cpp
+        converter.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

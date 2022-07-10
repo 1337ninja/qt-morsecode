@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include "converter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -17,8 +18,10 @@ public:
 
 private slots:
     void onIndexChanged(int index);
+    void onplainTextChanged();
 
 private:
     Ui::Widget *ui;
+    Converter converter;
 };
 #endif // WIDGET_H

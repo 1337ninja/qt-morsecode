@@ -9,6 +9,7 @@ Widget::Widget(QWidget *parent)
     ui->setupUi(this);
     ui->comboBox->setCurrentIndex(0);
     connect(ui->comboBox, &QComboBox::currentIndexChanged, this, &Widget::onIndexChanged);
+    connect(ui->plainText, &QTextEdit::textChanged, this, &Widget::onplainTextChanged);
 }
 
 Widget::~Widget()
@@ -25,3 +26,14 @@ void Widget::onIndexChanged(int index)
    ui->morseCode->move(plainTextPos);
 }
 
+void Widget::onplainTextChanged()
+{
+    qDebug() <<" Text changed.." << ui->plainText->toPlainText();
+    ui->morseCode->setReadOnly(true);
+    std::string plainText = ui->plainText->toPlainText().toStdString();
+    std::string morse;
+    for (auto c : plainText) {
+        morse += converter.plainTextToMorseCode(c);
+        ui->morseCode->setPlainText(QString::fromStdString(morse));
+    }
+}
