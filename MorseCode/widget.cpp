@@ -21,16 +21,27 @@ Widget::~Widget()
 void Widget::onIndexChanged(int index)
 {
    qDebug() << "Index: "<<index;
+   ui->plainText->clear();
+   ui->morseCode->clear();
    QPoint plainTextPos = ui->plainText->pos();
    QPoint morseCodePos = ui->morseCode->pos();
    ui->plainText->move(morseCodePos);
    ui->morseCode->move(plainTextPos);
+   /* Text to Morse */
+   if (0 == index) {
+       ui->morseCode->setReadOnly(true);
+       ui->plainText->setReadOnly(false);
+   }
+   /* Morse to Text */
+   else if (1 == index) {
+       ui->morseCode->setReadOnly(false);
+       ui->plainText->setReadOnly(true);
+   }
 }
 
 void Widget::onplainTextChanged()
 {
     qDebug() <<" Text changed.." << ui->plainText->toPlainText();
-    ui->morseCode->setReadOnly(true);
     std::string plainText = ui->plainText->toPlainText().toStdString();
     std::string morse;
     for (int i = 0; i < plainText.size(); i++) {
