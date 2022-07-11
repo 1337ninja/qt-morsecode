@@ -1,5 +1,6 @@
 #include "widget.h"
 #include "./ui_widget.h"
+#include "constants.h"
 #include <QDebug>
 
 Widget::Widget(QWidget *parent)
@@ -32,8 +33,11 @@ void Widget::onplainTextChanged()
     ui->morseCode->setReadOnly(true);
     std::string plainText = ui->plainText->toPlainText().toStdString();
     std::string morse;
-    for (auto c : plainText) {
-        morse += converter.plainTextToMorseCode(c);
-        ui->morseCode->setPlainText(QString::fromStdString(morse));
+    for (int i = 0; i < plainText.size(); i++) {
+        morse += converter.plainTextToMorseCode(plainText[i]);
+        if (i != plainText.size() - 1) {
+            morse += Constants::morseDelimiter;
+        }
     }
+    ui->morseCode->setPlainText(QString::fromStdString(morse));
 }
