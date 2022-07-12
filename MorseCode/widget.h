@@ -18,7 +18,8 @@ public:
 
 private slots:
     void onIndexChanged(int index);
-    void onplainTextChanged();
+    void onPlainTextChanged();
+    void onMorseCodeChanged();
 
 private:
     Ui::Widget *ui;

@@ -12,5 +12,9 @@ const std::string Converter::plainTextToMorseCode(char plainText)
 
 char Converter::morseToPlaintext(std::string morseCode)
 {
-    return '#'; // TODO
+    auto it = Constants::morseToPlainText.find(morseCode);
+    if (it != Constants::morseToPlainText.end()) {
+        return it->second;
+    }
+    return '#';
 }
