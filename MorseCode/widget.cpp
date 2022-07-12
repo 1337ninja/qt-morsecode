@@ -54,7 +54,8 @@ void Widget::onPlainTextChanged()
     for (int i = 0; i < plainText.size(); i++) {
         morse += converter.plainTextToMorseCode(plainText[i]);
         if (i != plainText.size() - 1) {
-            morse += Constants::morseDelimiter;
+            if (plainText[i+1] != ' ')
+                morse += Constants::morseDelimiter;
         }
     }
     ui->morseCode->setPlainText(QString::fromStdString(morse));
