@@ -6,7 +6,7 @@
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::Widget)
+    , ui(new Ui::Widget), spaces(0)
 {
     ui->setupUi(this);
     ui->comboBox->setCurrentIndex(0);
@@ -55,7 +55,7 @@ void Widget::onPlainTextChanged()
         morse += converter.plainTextToMorseCode(plainText[i]);
         if (i != plainText.size() - 1) {
             if (plainText[i+1] != ' ')
-                morse += Constants::morseDelimiter;
+                morse += Constants::morseCharDelimiter;
         }
     }
     ui->morseCode->setPlainText(QString::fromStdString(morse));
@@ -67,7 +67,19 @@ void Widget::onMorseCodeChanged()
     std::string morseText = ui->morseCode->toPlainText().toStdString();
     std::istringstream morse(morseText);
     std::string morseCode, plainText;
-    while (std::getline(morse, morseCode, Constants::morseDelimiter)) {
+    while (std::getline(morse, morseCode, Constants::morseCharDelimiter)) {
+        if (morseCode.empty()) {
+            ++spaces;
+            if (spaces % 2 != 0) {
+                morseCode = Constants::morseWordDelimiter;
+            }
+            else {
+                continue;
+            }
+        }
+        else {
+            spaces = 0;
+        }
         plainText +=  converter.morseToPlaintext(morseCode);
     }
     ui->plainText->setPlainText(QString::fromStdString(plainText));
