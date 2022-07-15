@@ -24,6 +24,5 @@ private slots:
 private:
     Ui::Widget *ui;
     Converter converter;
-    int spaces;
 };
 #endif // WIDGET_H

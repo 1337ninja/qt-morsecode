@@ -1,7 +1,10 @@
 #include "converter.h"
 #include "constants.h"
+#include <sstream>
 
-const std::string Converter::plainTextToMorseCode(std::string plainText)
+Converter::Converter() : spaces(0) {}
+
+const std::string Converter::plainTextToMorseCode(const std::string& plainText)
 {
     std::string morse;
     for (int i = 0; i < plainText.size(); i++) {
@@ -15,11 +18,25 @@ const std::string Converter::plainTextToMorseCode(std::string plainText)
     return morse;
 }
 
-char Converter::morseToPlaintext(std::string morseCode)
+const std::string Converter::morseToPlaintext(const std::string& morseText)
 {
-    auto it = Constants::morseToPlainText.find(morseCode);
-    if (it != Constants::morseToPlainText.end()) {
-        return it->second;
+    std::istringstream morse(morseText);
+    std::string morseCode, plainText;
+    while (std::getline(morse, morseCode, Constants::morseCharDelimiter)) {
+        if (morseCode.empty()) {
+            ++spaces;
+            if (spaces % 2 != 0) {
+                morseCode = Constants::morseWordDelimiter;
+            }
+            else {
+                continue;
+            }
+        }
+        else {
+            spaces = 0;
+        }
+        auto it = Constants::morseToPlainText.find(morseCode);
+        plainText +=  ( it != Constants::morseToPlainText.end() ? it->second : '#');
     }
-    return '#';
+    return plainText;
 }

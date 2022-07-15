@@ -5,9 +5,11 @@
 
 class Converter : public IConverter
 {
+    int spaces;
 public:
-    const std::string plainTextToMorseCode(std::string plainText);
-    char morseToPlaintext(std::string morseCode);
+    Converter();
+    const std::string plainTextToMorseCode(const std::string& plainText);
+    const std::string morseToPlaintext(const std::string& morseCode);
 };
 
 #endif // CONVERTER_H
