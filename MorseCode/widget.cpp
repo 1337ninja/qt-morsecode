@@ -50,15 +50,8 @@ void Widget::onPlainTextChanged()
 {
     qDebug() <<" Text changed.." << ui->plainText->toPlainText();
     std::string plainText = ui->plainText->toPlainText().toStdString();
-    std::string morse;
-    for (int i = 0; i < plainText.size(); i++) {
-        morse += converter.plainTextToMorseCode(plainText[i]);
-        if (i != plainText.size() - 1) {
-            if (plainText[i+1] != ' ')
-                morse += Constants::morseCharDelimiter;
-        }
-    }
-    ui->morseCode->setPlainText(QString::fromStdString(morse));
+    std::string morseCode = converter.plainTextToMorseCode(plainText);
+    ui->morseCode->setPlainText(QString::fromStdString(morseCode));
 }
 
 void Widget::onMorseCodeChanged()

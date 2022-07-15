@@ -6,7 +6,7 @@
 class Converter : public IConverter
 {
 public:
-    const std::string plainTextToMorseCode(char plainText);
+    const std::string plainTextToMorseCode(std::string plainText);
     char morseToPlaintext(std::string morseCode);
 };
 
