@@ -2,7 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
-#include "converter.h"
+#include "plaintext_morse_converter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }

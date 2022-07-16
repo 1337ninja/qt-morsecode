@@ -19,10 +19,10 @@ set(PROJECT_SOURCES
         widget.cpp
         widget.h
         widget.ui
-        converter_interface.h
-        constants.h
-        converter.cpp
         converter.h
+        constants.h
+        plaintext_morse_converter.h
+        plaintext_morse_converter.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

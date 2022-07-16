@@ -1,20 +1,13 @@
 #ifndef CONVERTER_H
 #define CONVERTER_H
 
-#include "converter_interface.h"
-
-using IPlaintextMorseConverter = IConverter<const std::string, const std::string&,
-                                            const std::string, const std::string&>;
-
-class PlaintextMorseConverter : public IPlaintextMorseConverter
+template <typename A, typename B, typename C, typename D>
+class IConverter
 {
-    int spaces;
 public:
-    PlaintextMorseConverter();
-    /* Convert plaintext to morse */
-    const std::string convert(const std::string& plainText);
-    /* Convert morse to plaintext */
-    const std::string inverseConvert(const std::string& morseCode);
+    virtual A convert(B data) = 0;
+    virtual C inverseConvert(D data) = 0;
+    virtual ~IConverter() {}
 };
 
 #endif // CONVERTER_H

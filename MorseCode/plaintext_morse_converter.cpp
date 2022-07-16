@@ -1,4 +1,4 @@
-#include "converter.h"
+#include "plaintext_morse_converter.h"
 #include "constants.h"
 #include <sstream>
 
