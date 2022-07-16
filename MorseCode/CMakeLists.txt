@@ -20,7 +20,6 @@ set(PROJECT_SOURCES
         widget.h
         widget.ui
         converter.h
-        constants.h
         plaintext_morse_converter.h
         plaintext_morse_converter.cpp
 )

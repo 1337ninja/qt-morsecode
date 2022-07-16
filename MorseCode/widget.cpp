@@ -1,6 +1,5 @@
 #include "widget.h"
 #include "./ui_widget.h"
-#include "constants.h"
 #include <QDebug>
 #include <sstream>
 
