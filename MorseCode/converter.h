@@ -3,13 +3,18 @@
 
 #include "converter_interface.h"
 
-class Converter : public IConverter
+using IPlaintextMorseConverter = IConverter<const std::string, const std::string&,
+                                            const std::string, const std::string&>;
+
+class PlaintextMorseConverter : public IPlaintextMorseConverter
 {
     int spaces;
 public:
-    Converter();
-    const std::string plainTextToMorseCode(const std::string& plainText);
-    const std::string morseToPlaintext(const std::string& morseCode);
+    PlaintextMorseConverter();
+    /* Convert plaintext to morse */
+    const std::string convert(const std::string& plainText);
+    /* Convert morse to plaintext */
+    const std::string inverseConvert(const std::string& morseCode);
 };
 
 #endif // CONVERTER_H

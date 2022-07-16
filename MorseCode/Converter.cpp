@@ -2,9 +2,9 @@
 #include "constants.h"
 #include <sstream>
 
-Converter::Converter() : spaces(0) {}
+PlaintextMorseConverter::PlaintextMorseConverter() : spaces(0) {}
 
-const std::string Converter::plainTextToMorseCode(const std::string& plainText)
+const std::string PlaintextMorseConverter::convert(const std::string& plainText)
 {
     std::string morse;
     for (int i = 0; i < plainText.size(); i++) {
@@ -18,7 +18,7 @@ const std::string Converter::plainTextToMorseCode(const std::string& plainText)
     return morse;
 }
 
-const std::string Converter::morseToPlaintext(const std::string& morseText)
+const std::string PlaintextMorseConverter::inverseConvert(const std::string& morseText)
 {
     std::istringstream morse(morseText);
     std::string morseCode, plainText;

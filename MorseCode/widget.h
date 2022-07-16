@@ -23,6 +23,6 @@ private slots:
 
 private:
     Ui::Widget *ui;
-    Converter converter;
+    IPlaintextMorseConverter *plaintextMorseConverter;
 };
 #endif // WIDGET_H

@@ -3,11 +3,12 @@
 
 #include <string>
 
+template <typename A, typename B, typename C, typename D>
 class IConverter
 {
 public:
-    virtual const std::string plainTextToMorseCode(const std::string& plainText) = 0;
-    virtual const std::string morseToPlaintext(const std::string& morseCode) = 0;
+    virtual A convert(B data) = 0;
+    virtual C inverseConvert(D data) = 0;
     virtual ~IConverter() {}
 };
 
