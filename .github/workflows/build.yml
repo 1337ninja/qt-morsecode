@@ -43,7 +43,7 @@ jobs:
         Write-Host "Configuring CMake..."
         cmake -DCMAKE_PREFIX_PATH=${{ env.Qt6_DIR }} -B ${{ env.CMAKE_BUILD_PATH }} -G "Visual Studio 17 2022"
 
-    - name: Build
+    - name: Build src and test
       run: cmake --build ${{ env.CMAKE_BUILD_PATH }} --config ${{ env.CMAKE_BUILD_TYPE }}
 
     - name: Run tests
@@ -57,5 +57,5 @@ jobs:
       run: |
         Write-Host "Creating deployment..."
         windeployqt ${{ env.MORSECODE_BIN }}
-        Compress-Archive -Path {{ env.RELEASE_PATH }}/* -DestinationPath {{ env.RELEASE_ARTEFACT }}
+        Compress-Archive -Path ${{ env.RELEASE_PATH }}/* -DestinationPath ${{ env.RELEASE_ARTEFACT }}
 
