@@ -62,7 +62,7 @@ jobs:
     - name: Set tag
       id: tag
       run: |
-        echo "::set-output release_tag::MorseCode_${{ github.run_id }}
+        echo "::set-output release_tag::MorseCode_${{ github.run_id }}"
 
     - name: Publish Release
       uses: softprops/action-gh-release@v1
