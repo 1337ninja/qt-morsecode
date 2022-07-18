@@ -47,5 +47,5 @@ jobs:
 
     - name: Run tests
       working-directory: ${{ env.CMAKE_BUILD_PATH }}
-      run: ctest -VV -C ${{ env.CMAKE_BUILD_TYPE }}
+      run: ctest -V -C ${{ env.CMAKE_BUILD_TYPE }}
 
