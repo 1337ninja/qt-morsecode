@@ -11,6 +11,7 @@ env:
   CMAKE_BUILD_PATH: ./build
   QT_INSTALL_LOCATION: 'C:/'
   QT_VERSION: '6.2.0'
+  RELEASE_ARTEFACT: MorseCode.zip
 
 jobs:
   build-qt-windows:
@@ -47,5 +48,14 @@ jobs:
 
     - name: Run tests
       working-directory: ${{ env.CMAKE_BUILD_PATH }}
-      run: ctest -V -C ${{ env.CMAKE_BUILD_TYPE }}
+      run: ctest -C ${{ env.CMAKE_BUILD_TYPE }} --verbose
+
+    - name: Create and archive binary deployment
+      env:
+        MORSECODE_BIN: ${{ env.CMAKE_BUILD_PATH }}/src/${{ env.CMAKE_BUILD_TYPE }}/MorseCode.exe
+        RELEASE_PATH: ${{ env.CMAKE_BUILD_PATH }}/src/${{ env.CMAKE_BUILD_TYPE }}
+      run: |
+        Write-Host "Creating deployment..."
+        windeployqt ${{ env.MORSECODE_BIN }}
+        Compress-Archive -Path {{ env.RELEASE_PATH }}/* -DestinationPath {{ env.RELEASE_ARTEFACT }}
 
