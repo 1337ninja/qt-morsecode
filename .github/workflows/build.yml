@@ -58,4 +58,6 @@ jobs:
         Write-Host "Creating deployment..."
         windeployqt ${{ env.MORSECODE_BIN }}
         Compress-Archive -Path ${{ env.RELEASE_PATH }}/* -DestinationPath ${{ env.RELEASE_ARTEFACT }}
+        Write-Host "list files"
+        Get-ChildItem
 
