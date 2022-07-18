@@ -43,7 +43,7 @@ jobs:
         Write-Host "Configuring CMake..."
         cmake -DCMAKE_PREFIX_PATH=${{ env.Qt6_DIR }} -B ${{ env.CMAKE_BUILD_PATH }} -G "Visual Studio 17 2022"
 
-    - name: Build src and test
+    - name: Build src and test projects
       run: cmake --build ${{ env.CMAKE_BUILD_PATH }} --config ${{ env.CMAKE_BUILD_TYPE }}
 
     - name: Run tests
@@ -62,7 +62,7 @@ jobs:
     - name: Set tag
       id: tag
       run: |
-        echo "::set-output release_tag::MorseCode_${{ github.run_id }}"
+        echo "::set-output name=release_tag::MorseCode_${{ github.run_id }}"
 
     - name: Publish Release
       uses: softprops/action-gh-release@v1
