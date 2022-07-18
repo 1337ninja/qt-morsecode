@@ -59,9 +59,16 @@ jobs:
         windeployqt ${{ env.MORSECODE_BIN }}
         Compress-Archive -Path ${{ env.RELEASE_PATH }}/* -DestinationPath ${{ env.RELEASE_ARTEFACT }}
 
+    - name: Set tag
+      id: tag
+      run: |
+        echo "::set-output release_tag::MorseCode_${{ github.run_id }}
+
     - name: Publish Release
       uses: softprops/action-gh-release@v1
-      # if: startsWith(github.ref, 'refs/tags/')
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
+        tag_name: ${{ steps.tag.outputs.release_tag }}
         files: |
           ${{ env.RELEASE_ARTEFACT }}
