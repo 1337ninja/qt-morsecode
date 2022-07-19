@@ -70,13 +70,13 @@ jobs:
 
     - name: Set tag
       id: tag
-      # if: ${{ github.event.inputs.publish-release == 'true' }}
+      if: ${{ github.event.inputs.publish-release == 'true' }}
       run: |
         echo "::set-output name=release_tag::MorseCode_${{ github.run_number }}"
 
     - name: Publish Release
       uses: softprops/action-gh-release@v1
-      # if: ${{ github.event.inputs.publish-release == 'true' }}
+      if: ${{ github.event.inputs.publish-release == 'true' }}
       env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:

@@ -63,5 +63,11 @@ cd <build-dir> ; ctest -C Release -VV
 - We use the workflow_dispatch to publish a release, by default it is set to false.
 - To publish a release go to the [Actions](https://github.com/1337ninja/qt-morsecode/actions/workflows/build-qt.yml) tab.
 - Then select `Run Workflow`, choose the branch, check `Publish Release` and select `Run Workflow` button
+![](res/gh-release.png)
+- The workflow will create a tag in the format `MorseCode_<github.run_number>` and publishes a [release](https://github.com/1337ninja/qt-morsecode/releases) in the same name.
 
-  ![](res/gh-release.png)
+## Running the executable
+> ℹ️ This requires a Windows OS
+- Go to [Releases](https://github.com/1337ninja/qt-morsecode/releases) and find the release tagged `Latest`
+- Download `MorseCode.zip` and extract it.
+- Run `MorseCode.exe`
