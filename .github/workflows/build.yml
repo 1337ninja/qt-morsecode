@@ -66,14 +66,14 @@ jobs:
         Compress-Archive -Path ${{ env.RELEASE_PATH }}/* -DestinationPath ${{ env.RELEASE_ARTEFACT }}
 
     - name: Set tag
-      if ${{ inputs.publish-release }}
       id: tag
+      if ${{ inputs.publish-release == 'true' }}
       run: |
         echo "::set-output name=release_tag::MorseCode_${{ github.run_attempt }}"
 
     - name: Publish Release
       uses: softprops/action-gh-release@v1
-      if ${{ inputs.publish-release }}
+      if ${{ inputs.publish-release == 'true' }}
       env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
