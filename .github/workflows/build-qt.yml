@@ -11,6 +11,7 @@ on:
         description: Publish Release
         required: false
         type: boolean
+        default: true
 
 env:
   CMAKE_BUILD_TYPE: Release
@@ -53,6 +54,7 @@ jobs:
       run: cmake --build ${{ env.CMAKE_BUILD_PATH }} --config ${{ env.CMAKE_BUILD_TYPE }}
 
     - name: Run tests
+      working-directory: ${{ env.CMAKE_BUILD_PATH }}
       run: ctest -C ${{ env.CMAKE_BUILD_TYPE }} --verbose
 
     - name: Print test results
