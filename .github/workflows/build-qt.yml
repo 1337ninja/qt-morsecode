@@ -38,8 +38,6 @@ jobs:
 
     - name: Setup cmake
       uses: jwlawson/actions-setup-cmake@v1.12
-      with:
-        cmake-version: '3.22.5'
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.1
@@ -55,8 +53,11 @@ jobs:
       run: cmake --build ${{ env.CMAKE_BUILD_PATH }} --config ${{ env.CMAKE_BUILD_TYPE }}
 
     - name: Run tests
-      working-directory: ${{ env.CMAKE_BUILD_PATH }}
       run: ctest -C ${{ env.CMAKE_BUILD_TYPE }} --verbose
+
+    - name: Print test results
+      working-directory: ${{ env.CMAKE_BUILD_PATH }}/tests/${{ env.CMAKE_BUILD_TYPE }}
+      run: ./MorseCode_Test.exe
 
     - name: Create and archive binary deployment
       env:
@@ -79,7 +80,7 @@ jobs:
       env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        target_commitish: morse-code
+        target_commitish: ${{ github.sha }}
         tag_name: ${{ steps.tag.outputs.release_tag }}
         files: |
           ${{ env.RELEASE_ARTEFACT }}
