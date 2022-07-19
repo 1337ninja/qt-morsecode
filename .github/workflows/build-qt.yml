@@ -12,18 +12,75 @@ on:
         required: false
         type: boolean
 
+env:
+  CMAKE_BUILD_TYPE: Release
+  CMAKE_BUILD_PATH: ./build
+  QT_INSTALL_LOCATION: 'C:/'
+  QT_VERSION: '6.2.0'
+  RELEASE_ARTEFACT: MorseCode.zip
+
 jobs:
   build-qt-windows:
     runs-on: windows-latest
     steps:
-    - name: Cache Qt
-      id: cache-qt
-      uses: actions/cache@v1  # not v2!
-      with:
-        path: ../Qt
-        key: ${{ runner.os }}-QtCache
+
+    - name: Checkout repo
+      uses: actions/checkout@v3
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        cached: ${{ steps.cache-qt.outputs.cache-hit }}
+        version: ${{ env.QT_VERSION }}
+        dir: ${{ env.QT_INSTALL_LOCATION }}
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_msvc2019_64'
+
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.12
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+      with:
+        msbuild-architecture: x64
+
+    - name: Configure CMake
+      run: |
+        Write-Host "Configuring CMake..."
+        cmake -DCMAKE_PREFIX_PATH=${{ env.Qt6_DIR }} -B ${{ env.CMAKE_BUILD_PATH }} -G "Visual Studio 17 2022"
+
+    - name: Build src and test projects
+      run: cmake --build ${{ env.CMAKE_BUILD_PATH }} --config ${{ env.CMAKE_BUILD_TYPE }}
+
+    - name: Run tests
+      working-directory: ${{ env.CMAKE_BUILD_PATH }}
+      run: ctest -C ${{ env.CMAKE_BUILD_TYPE }} --verbose
+
+    - name: Print test results
+      run: ${{ env.CMAKE_BUILD_PATH }}/tests/${{ env.CMAKE_BUILD_TYPE }}/MorseCode_Test.exe
+
+    - name: Create and archive binary deployment
+      env:
+        MORSECODE_BIN: ${{ env.CMAKE_BUILD_PATH }}/src/${{ env.CMAKE_BUILD_TYPE }}/MorseCode.exe
+        RELEASE_PATH: ${{ env.CMAKE_BUILD_PATH }}/src/${{ env.CMAKE_BUILD_TYPE }}
+      run: |
+        Write-Host "Creating deployment..."
+        windeployqt ${{ env.MORSECODE_BIN }}
+        Compress-Archive -Path ${{ env.RELEASE_PATH }}/* -DestinationPath ${{ env.RELEASE_ARTEFACT }}
+
+    - name: Set tag
+      id: tag
+      # if: ${{ github.event.inputs.publish-release == 'true' }}
+      run: |
+        echo "::set-output name=release_tag::MorseCode_${{ github.run_number }}"
+
+    - name: Publish Release
+      uses: softprops/action-gh-release@v1
+      # if: ${{ github.event.inputs.publish-release == 'true' }}
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        target_commitish: ${{ github.sha }}
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        files: |
+          ${{ env.RELEASE_ARTEFACT }}
