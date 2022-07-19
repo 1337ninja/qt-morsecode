@@ -20,7 +20,7 @@ This project converts plaintext to morsecode and vice-versa in realtime. We can 
 ![](res/morse-to-text.gif)
 
 ## Building the application
-The application is a QT Widget application and uses CMake to build.
+The application is a QT `6.2.0` Widget application and uses CMake as its build system.
 ```
 cmake -DCMAKE_PREFIX_PATH=<qt-install-path> -B <build-dir> -G "Visual Studio 17 2022"
 cmake --build <build-dir> --config Release
@@ -32,6 +32,10 @@ cmake --build <build-dir> --config Release
 ```
 cd <build-dir> ; ctest -C Release -VV
 ```
+>⚠️ On GitHub Actions, unable to see the test report with CTest verbose enabled or running the test binary directly.
+- The test report would look like below
+
+  ![](res/test-report.png)
 
 ## Creating Windows deployment
 - We use `windeployqt` to prepare a Windows deployment along with related Qt dependencies.
@@ -50,7 +54,7 @@ cd <build-dir> ; ctest -C Release -VV
   - Installs QT
   - Sets up CMake
   - Installs MSBuild
-  - Builds src & test projects
+  - Builds src & test projects in Release mode by default (configurable).
   - Creates a Windows deployment
   - Publishes the release conditionally based on workflow_dispatch
 
