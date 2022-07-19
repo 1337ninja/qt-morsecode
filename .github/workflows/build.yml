@@ -71,7 +71,7 @@ jobs:
         echo "::set-output name=release_tag::MorseCode_${{ github.run_attempt }}"
 
     - name: Publish Release
-      if {{ inputs.publish-release}}
+      if ${{ inputs.publish-release }}
       uses: softprops/action-gh-release@v1
       env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
