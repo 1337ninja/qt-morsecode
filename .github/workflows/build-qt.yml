@@ -56,9 +56,6 @@ jobs:
       working-directory: ${{ env.CMAKE_BUILD_PATH }}
       run: ctest -C ${{ env.CMAKE_BUILD_TYPE }} --verbose
 
-    - name: Print test results
-      run: ${{ env.CMAKE_BUILD_PATH }}/tests/${{ env.CMAKE_BUILD_TYPE }}/MorseCode_Test.exe
-
     - name: Create and archive binary deployment
       env:
         MORSECODE_BIN: ${{ env.CMAKE_BUILD_PATH }}/src/${{ env.CMAKE_BUILD_TYPE }}/MorseCode.exe
