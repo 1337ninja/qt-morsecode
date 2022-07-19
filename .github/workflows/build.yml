@@ -5,6 +5,12 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      publish-release:
+        description: Publish Release
+        required: false
+        type: boolean
 
 jobs:
   build-qt-windows:
