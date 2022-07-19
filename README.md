@@ -42,7 +42,7 @@ cd .\build\ ; ctest -C Release -VV
 
 ## Continuous Integration
 - We use GitHub Actions to do CI.
-- The workflow file is present here
+- The workflow file is present here --> [build-qt.yml](.github/workflows/build-qt.yml)
 - The workflow runs automatically
   - On a new push to main branch or
   - When a PR is created against the main branch
