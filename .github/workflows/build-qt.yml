@@ -77,7 +77,7 @@ jobs:
       env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        target_commitish: refs/heads/morse-code
+        target_commitish: 4eeed2b9ec546cfe4014eacc410eec0be5b8ac71
         tag_name: ${{ steps.tag.outputs.release_tag }}
         files: |
           ${{ env.RELEASE_ARTEFACT }}
