@@ -30,7 +30,7 @@ cmake --build <build-dir> --config Release
 - The application uses <QTest> for the unit tests
 - To run the tests we go to the <build-dir> and run ctest to run all tests.
 ```
-cd .\build\ ; ctest -C Release -VV
+cd <build-dir> ; ctest -C Release -VV
 ```
 
 ## Creating Windows deployment
@@ -52,4 +52,12 @@ cd .\build\ ; ctest -C Release -VV
   - Installs MSBuild
   - Builds src & test projects
   - Creates a Windows deployment
-  - Publishes the release conditionally
+  - Publishes the release conditionally based on workflow_dispatch
+
+## Publishing a Release
+- Currently a new release is published only when running the action manually.
+- We use the workflow_dispatch to publish a release, by default it is set to false.
+- To publish a release go to the [Actions](https://github.com/1337ninja/qt-morsecode/actions/workflows/build-qt.yml) tab.
+- Then select `Run Workflow`, choose the branch, check `Publish Release` and select `Run Workflow` button
+
+  ![](res/gh-release.png)
