@@ -38,6 +38,8 @@ jobs:
 
     - name: Setup cmake
       uses: jwlawson/actions-setup-cmake@v1.12
+      with:
+        cmake-version: '3.20.6'
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.1
@@ -69,7 +71,7 @@ jobs:
       id: tag
       if: ${{ github.event.inputs.publish-release == 'true' }}
       run: |
-        echo "::set-output name=release_tag::MorseCode_${{ github.run_attempt }}"
+        echo "::set-output name=release_tag::MorseCode_${{ github.run_number }}"
 
     - name: Publish Release
       uses: softprops/action-gh-release@v1
@@ -77,7 +79,7 @@ jobs:
       env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        target_commitish: 4eeed2b9ec546cfe4014eacc410eec0be5b8ac71
+        target_commitish: morse-code
         tag_name: ${{ steps.tag.outputs.release_tag }}
         files: |
           ${{ env.RELEASE_ARTEFACT }}
